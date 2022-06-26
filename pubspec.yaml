@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   flutter_svg: ^1.1.0
   cached_network_image: ^3.2.1
+  google_fonts: ^3.0.1
 
   #State Management
   flutter_bloc: ^8.0.1
