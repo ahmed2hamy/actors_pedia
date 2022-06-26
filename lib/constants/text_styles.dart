@@ -2,6 +2,6 @@ part of 'constants.dart';
 
 final TextStyle kWhiteBigBoldTextStyle = GoogleFonts.poppins(
   color: Colors.white,
-  fontSize: 60,
+  fontSize: 40.0,
   fontWeight: FontWeight.bold,
 );

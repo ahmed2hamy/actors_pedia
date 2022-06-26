@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:actors_pedia/core/helpers/network/network_client.dart';
 import 'package:actors_pedia/core/helpers/network/network_info.dart';
+import 'package:actors_pedia/injection_container/home_injection_container.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ Future<void> init() async {
   String apiKey = await _readApiKey();
 
   ///Features:
+  injectHomeFeature(_sl);
 
   ///Core:
   _sl.registerLazySingleton<NetworkInfo>(
@@ -33,7 +35,7 @@ Future<void> init() async {
 
 Future<String> _readApiKey() async {
   final String json = await rootBundle.loadString('assets/api_key.json');
-  final Map<String, String> map = await jsonDecode(json);
+  final Map<String, dynamic> map = await jsonDecode(json);
   final String key = map['api_key']!;
   return key;
 }

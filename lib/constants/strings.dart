@@ -1,6 +1,6 @@
 part of 'constants.dart';
 
-const String kAppTitleString = "Actors Pedia";
+const String kAppTitleString = "ActorsPedia";
 
 ///Errors:
 const String kDataNotFoundString = "Data Not Found";

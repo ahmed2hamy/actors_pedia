@@ -39,7 +39,7 @@ class NetworkClient {
         options: options,
       );
 
-      Map<String, dynamic> data = jsonDecode(response.data.toString());
+      Map<String, dynamic> data = jsonDecode(jsonEncode(response.data));
       return data;
     } catch (e) {
       log(e.toString());
