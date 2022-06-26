@@ -8,12 +8,19 @@ import 'package:dio/dio.dart';
 class NetworkClient {
   final Dio _dio;
 
-  NetworkClient({required Dio dio}) : _dio = dio {
+  NetworkClient({
+    required Dio dio,
+    required String apiKey,
+  }) : _dio = dio {
     _dio.options = BaseOptions(
       baseUrl: kBaseUrl,
       receiveDataWhenStatusError: true,
       followRedirects: true,
       validateStatus: (status) => status! < 500,
+      queryParameters: {
+        "api_key": apiKey,
+        "language": "en-US",
+      },
       headers: {
         HttpHeaders.contentTypeHeader: "application/json",
       },
@@ -22,11 +29,13 @@ class NetworkClient {
 
   Future<Map<String, dynamic>> getData({
     required String endpoint,
+    Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
     try {
       Response response = await _dio.get(
         endpoint,
+        queryParameters: queryParameters,
         options: options,
       );
 
