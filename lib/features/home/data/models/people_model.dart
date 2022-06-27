@@ -37,6 +37,7 @@ class PeopleModel extends People {
           profilePath: v.profilePath,
           adult: v.adult,
           id: v.id,
+          knownFor: v.knownFor,
           name: v.name,
           popularity: v.popularity,
         );
