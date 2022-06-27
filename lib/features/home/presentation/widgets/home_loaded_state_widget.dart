@@ -47,7 +47,7 @@ class HomeLoadedStateWidget extends StatelessWidget {
                   ),
                   child: Text(
                     name,
-                    style: const TextStyle(color: Colors.black, fontSize: 23.0),
+                    style: kBlackMediumTextStyle,
                   ),
                 ),
                 Positioned.fill(
