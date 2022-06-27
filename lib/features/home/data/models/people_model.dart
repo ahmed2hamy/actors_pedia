@@ -5,6 +5,9 @@ import 'person_model.dart';
 
 class PeopleModel extends People {
   PeopleModel({
+    this.success = true,
+    this.statusCode,
+    this.statusMessage,
     int? page,
     List<Person>? personsList,
     int? totalResults,
@@ -16,7 +19,14 @@ class PeopleModel extends People {
           totalPages: totalPages,
         );
 
-  PeopleModel.fromJson(dynamic json) {
+  bool success = true;
+  int? statusCode;
+  String? statusMessage;
+
+  PeopleModel.fromJson(Map<String, dynamic> json) {
+    success = json['success'] ?? true;
+    statusCode = json['status_code'];
+    statusMessage = json['status_message'];
     page = json['page'];
     if (json['results'] != null) {
       personsList = [];
@@ -30,6 +40,9 @@ class PeopleModel extends People {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['success'] = success;
+    map['status_code'] = statusCode;
+    map['status_message'] = statusMessage;
     map['page'] = page;
     if (personsList != null) {
       map['results'] = personsList?.map((v) {

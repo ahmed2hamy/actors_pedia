@@ -35,7 +35,7 @@ class KnownForModel extends KnownFor {
           voteAverage: voteAverage,
         );
 
-  KnownForModel.fromJson(dynamic json) {
+  KnownForModel.fromJson(Map<String, dynamic> json) {
     posterPath = json['poster_path'];
     adult = json['adult'];
     overview = json['overview'];

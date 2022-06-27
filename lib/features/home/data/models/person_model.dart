@@ -19,7 +19,7 @@ class PersonModel extends Person {
           popularity: popularity,
         );
 
-  PersonModel.fromJson(dynamic json) {
+  PersonModel.fromJson(Map<String, dynamic> json) {
     profilePath = json['profile_path'];
     adult = json['adult'];
     id = json['id'];
