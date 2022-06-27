@@ -1,5 +1,5 @@
 abstract class RequestBody<T> {
-  T fromJson(String json);
+  T fromJson(Map<String, dynamic> json);
 
-  String toJson();
+  Map<String, dynamic> toJson();
 }

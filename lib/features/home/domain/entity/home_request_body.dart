@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:actors_pedia/core/models/request_body.dart';
 
 class HomeRequestBody implements RequestBody<HomeRequestBody> {
@@ -8,15 +6,14 @@ class HomeRequestBody implements RequestBody<HomeRequestBody> {
   HomeRequestBody({required this.page});
 
   @override
-  HomeRequestBody fromJson(String json) {
-    Map<String, dynamic> map = jsonDecode(json);
-    return HomeRequestBody(page: map['page']);
+  HomeRequestBody fromJson(Map<String, dynamic> json) {
+    return HomeRequestBody(page: json['page']);
   }
 
   @override
-  String toJson() {
-    return jsonEncode({
+  Map<String, dynamic> toJson() {
+    return {
       'page': page,
-    });
+    };
   }
 }

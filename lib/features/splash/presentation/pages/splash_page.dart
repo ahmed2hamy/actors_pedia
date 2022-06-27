@@ -16,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeCubit>().getActorsEvent(1);
+    context.read<HomeCubit>().getPeopleEvent();
 
     Future.delayed(const Duration(seconds: 3)).then(
       (_) => AppNavigator.pushReplacement(

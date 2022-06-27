@@ -12,7 +12,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final ScrollController _scrollController = ScrollController();
+  final List<Results> _results = [];
   int _page = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _page = ++_page;
+        context.read<HomeCubit>().getMorePeopleEvent(_page);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +43,18 @@ class _HomePageState extends State<HomePage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is HomeLoadedState) {
-            List<Results> results = state.people.results ?? [];
+            _results.addAll(state.people.results ?? []);
 
             return ListView.builder(
-              itemCount: results.length,
+              controller: _scrollController,
+              itemCount: _results.length,
               itemBuilder: (context, index) {
+                if (index == _results.length - 1) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
                 return ListTile(
-                  title: Text(results[index].name ?? ''),
+                  title: Text(_results[index].name ?? ''),
                 );
               },
             );
@@ -45,5 +64,11 @@ class _HomePageState extends State<HomePage> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
   }
 }
