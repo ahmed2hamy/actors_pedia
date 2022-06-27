@@ -1,4 +1,5 @@
 import 'package:actors_pedia/core/helpers/dialogs.dart';
+import 'package:actors_pedia/core/widgets/app_loading_widget.dart';
 import 'package:actors_pedia/features/home/domain/entity/person.dart';
 import 'package:actors_pedia/features/home/presentation/manger/home_cubit.dart';
 import 'package:actors_pedia/features/home/presentation/widgets/home_loaded_state_widget.dart';
@@ -26,9 +27,7 @@ class HomeBodyWidget extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is HomeLoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const AppLoadingWidget();
         } else if (state is HomeLoadedState) {
           _persons.addAll(state.people.personsList ?? []);
 

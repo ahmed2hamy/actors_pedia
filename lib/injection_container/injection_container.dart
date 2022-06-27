@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:actors_pedia/core/helpers/network/network_client.dart';
 import 'package:actors_pedia/core/helpers/network/network_info.dart';
 import 'package:actors_pedia/injection_container/home_injection_container.dart';
+import 'package:actors_pedia/injection_container/person_details_injection_container.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ Future<void> init() async {
 
   ///Features:
   injectHomeFeature(_sl);
+
+  injectPersonDetailsFeature(_sl);
 
   ///Core:
   _sl.registerLazySingleton<NetworkInfo>(

@@ -42,9 +42,15 @@ class _HomePageState extends State<HomePage> {
 
   void _manipulateBackToTopButton() {
     if (_scrollController.offset >= 400) {
-      Provider.of<HomeScrollToTopProvider>(context).showBackToTopButton();
+      Provider.of<HomeScrollToTopProvider>(
+        context,
+        listen: false,
+      ).showBackToTopButton();
     } else {
-      Provider.of<HomeScrollToTopProvider>(context).hideBackToTopButton();
+      Provider.of<HomeScrollToTopProvider>(
+        context,
+        listen: false,
+      ).hideBackToTopButton();
     }
   }
 

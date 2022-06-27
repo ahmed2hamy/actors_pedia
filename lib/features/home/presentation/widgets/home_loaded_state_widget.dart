@@ -59,7 +59,7 @@ class HomeLoadedStateWidget extends StatelessWidget {
                     child: InkWell(
                       onTap: () => AppNavigator.pushTo(
                         context,
-                        widget: PersonDetailsPage(personId: personId),
+                        widget: PersonDetailsPage(person: _persons[index]),
                       ),
                     ),
                   ),
