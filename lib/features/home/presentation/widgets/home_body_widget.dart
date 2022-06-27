@@ -6,16 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBodyWidget extends StatelessWidget {
-  const HomeBodyWidget({
+  HomeBodyWidget({
     Key? key,
-    required List<Person> results,
     required ScrollController scrollController,
-  })  : _results = results,
-        _scrollController = scrollController,
+  })  : _scrollController = scrollController,
+        _persons = [],
         super(key: key);
 
-  final List<Person> _results;
   final ScrollController _scrollController;
+  final List<Person> _persons;
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +30,11 @@ class HomeBodyWidget extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (state is HomeLoadedState) {
-          _results.addAll(state.people.personsList ?? []);
+          _persons.addAll(state.people.personsList ?? []);
 
           return HomeLoadedStateWidget(
             scrollController: _scrollController,
-            results: _results,
+            persons: _persons,
           );
         } else {
           return const SizedBox();

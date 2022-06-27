@@ -17,6 +17,7 @@ class AdaptiveImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image(
       image: AdaptiveImageProvider(imageUrl),
+      errorBuilder: (_, __, ___) => const Icon(Icons.error),
       fit: fit,
     );
   }

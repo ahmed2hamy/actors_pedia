@@ -5,9 +5,13 @@ import 'package:actors_pedia/features/home/data/repositories/home_repository_imp
 import 'package:actors_pedia/features/home/domain/repositories/home_repository.dart';
 import 'package:actors_pedia/features/home/domain/use_cases/get_people_use_case.dart';
 import 'package:actors_pedia/features/home/presentation/manger/home_cubit.dart';
+import 'package:actors_pedia/features/home/presentation/manger/home_scroll_to_top_provider.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> injectHomeFeature(GetIt sl) async {
+  ///Provider:
+  sl.registerFactory<HomeScrollToTopProvider>(() => HomeScrollToTopProvider());
+
   ///Bloc:
   sl.registerLazySingleton<HomeCubit>(
     () => HomeCubit(
