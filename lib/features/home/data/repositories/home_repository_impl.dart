@@ -26,7 +26,8 @@ class HomeRepositoryImpl implements HomeRepository {
         if (people.success) {
           return Right(people);
         } else {
-          return Left(ServerFailure(people.statusMessage ?? ''));
+          return Left(
+              ServerFailure(people.statusMessage ?? kDataNotFoundString));
         }
       } catch (e) {
         return Left(ServerFailure(e.toString()));
