@@ -10,7 +10,7 @@ class AppPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AdaptiveImage(
-      image: kDefaultImage,
+      imageUrl: kDefaultImage,
       fit: fit,
     );
   }

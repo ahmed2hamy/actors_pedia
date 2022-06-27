@@ -4,23 +4,26 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class AdaptiveImage extends StatelessWidget {
-  final String image;
+  final String imageUrl;
   final BoxFit? fit;
 
-  const AdaptiveImage({Key? key, required this.image, this.fit})
-      : super(key: key);
+  const AdaptiveImage({
+    Key? key,
+    required this.imageUrl,
+    this.fit,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Image(
-      image: AdaptiveImageProvider(image),
+      image: AdaptiveImageProvider(imageUrl),
       fit: fit,
     );
   }
 }
 
 class AdaptiveImageProvider extends ImageProvider {
-  AdaptiveImageProvider(String url) : _delegate = _resolve(url);
+  AdaptiveImageProvider(String imageUrl) : _delegate = _resolve(imageUrl);
   final ImageProvider _delegate;
 
   static ImageProvider _resolve(String url) {

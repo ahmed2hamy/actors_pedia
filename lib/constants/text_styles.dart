@@ -5,3 +5,8 @@ final TextStyle kWhiteBigBoldTextStyle = GoogleFonts.poppins(
   fontSize: 40.0,
   fontWeight: FontWeight.bold,
 );
+
+final TextStyle kWhiteBoldTextStyle = GoogleFonts.poppins(
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);

@@ -1,8 +1,12 @@
-import 'package:actors_pedia/core/helpers/dialogs.dart';
+import 'package:actors_pedia/constants/constants.dart';
+import 'package:actors_pedia/core/widgets/custom_app_bar.dart';
 import 'package:actors_pedia/features/home/domain/entity/results.dart';
 import 'package:actors_pedia/features/home/presentation/manger/home_cubit.dart';
+import 'package:actors_pedia/features/home/presentation/manger/home_scroll_to_top_provider.dart';
+import 'package:actors_pedia/features/home/presentation/widgets/home_body_widget.dart';
+import 'package:actors_pedia/features/home/presentation/widgets/home_floating_action_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,6 +23,16 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_scrollListenerEvents);
+  }
+
+  void _scrollListenerEvents() {
+    _getMorePeople();
+
+    _manipulateBackToTopButton();
+  }
+
+  void _getMorePeople() {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
@@ -28,41 +42,34 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _manipulateBackToTopButton() {
+    if (_scrollController.offset >= 400) {
+      Provider.of<HomeScrollToTopProvider>(context).showBackToTopButton();
+    } else {
+      Provider.of<HomeScrollToTopProvider>(context).hideBackToTopButton();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<HomeCubit, HomeState>(
-        listener: (context, state) {
-          if (state is HomeErrorState) {
-            Dialogs.showAppSnackBar(context, content: state.errorMessage);
-          }
-        },
-        builder: (context, state) {
-          if (state is HomeLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is HomeLoadedState) {
-            _results.addAll(state.people.results ?? []);
-
-            return ListView.builder(
-              controller: _scrollController,
-              itemCount: _results.length,
-              itemBuilder: (context, index) {
-                if (index == _results.length - 1) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-
-                return ListTile(
-                  title: Text(_results[index].name ?? ''),
-                );
-              },
-            );
-          } else {
-            return const SizedBox();
-          }
-        },
+      appBar: CustomAppBar.buildAppBar(
+        context: context,
+        title: kAppTitleString,
       ),
+      body: HomeBodyWidget(
+        results: _results,
+        scrollController: _scrollController,
+      ),
+      floatingActionButton: HomeFloatingActionButton(onPressed: _scrollToTop),
+    );
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(seconds: 2),
+      curve: Curves.ease,
     );
   }
 

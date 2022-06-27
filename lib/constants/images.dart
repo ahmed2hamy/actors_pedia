@@ -2,6 +2,8 @@
 
 part of 'constants.dart';
 
-const String _rootImages = "images/";
+const String _rootImages = "asset://assets/images/";
 
-const String kDefaultImage = _rootImages + "";
+const String kDefaultImage = _rootImages + "default.png";
+
+const String kTitleBGImage = _rootImages + "title_bg.png";
