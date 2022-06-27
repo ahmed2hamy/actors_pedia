@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:actors_pedia/core/helpers/local_cache_helper.dart';
 import 'package:actors_pedia/core/helpers/network/network_client.dart';
 import 'package:actors_pedia/core/helpers/network/network_info.dart';
 import 'package:actors_pedia/injection_container/home_injection_container.dart';
@@ -9,6 +10,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final _sl = GetIt.instance;
 
@@ -29,11 +31,17 @@ Future<void> init() async {
   _sl.registerLazySingleton<NetworkClient>(
     () => NetworkClient(dio: _sl<Dio>(), apiKey: apiKey),
   );
+  _sl.registerLazySingleton<LocalCacheHelper>(
+    () => LocalCacheHelper(sharedPreferences: _sl<SharedPreferences>()),
+  );
 
   ///External:
   _sl.registerLazySingleton<Connectivity>(() => Connectivity());
 
   _sl.registerLazySingleton<Dio>(() => Dio());
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  _sl.registerLazySingleton<SharedPreferences>(() => prefs);
 }
 
 Future<String> _readApiKey() async {
