@@ -1,19 +1,19 @@
 import 'package:actors_pedia/constants/constants.dart';
 import 'package:actors_pedia/core/widgets/adaptive_image.dart';
-import 'package:actors_pedia/features/home/domain/entity/results.dart';
+import 'package:actors_pedia/features/home/domain/entity/person.dart';
 import 'package:flutter/material.dart';
 
 class HomeLoadedStateWidget extends StatelessWidget {
   const HomeLoadedStateWidget({
     Key? key,
     required ScrollController scrollController,
-    required List<Results> results,
+    required List<Person> results,
   })  : _scrollController = scrollController,
         _results = results,
         super(key: key);
 
   final ScrollController _scrollController;
-  final List<Results> _results;
+  final List<Person> _results;
 
   @override
   Widget build(BuildContext context) {

@@ -1,17 +1,17 @@
 import 'package:actors_pedia/features/home/domain/entity/people.dart';
-import 'package:actors_pedia/features/home/domain/entity/results.dart';
+import 'package:actors_pedia/features/home/domain/entity/person.dart';
 
-import 'results_model.dart';
+import 'person_model.dart';
 
 class PeopleModel extends People {
   PeopleModel({
     int? page,
-    List<Results>? results,
+    List<Person>? personsList,
     int? totalResults,
     int? totalPages,
   }) : super(
           page: page,
-          results: results,
+          personsList: personsList,
           totalResults: totalResults,
           totalPages: totalPages,
         );
@@ -19,9 +19,9 @@ class PeopleModel extends People {
   PeopleModel.fromJson(dynamic json) {
     page = json['page'];
     if (json['results'] != null) {
-      results = [];
+      personsList = [];
       json['results'].forEach((v) {
-        results?.add(ResultsModel.fromJson(v));
+        personsList?.add(PersonModel.fromJson(v));
       });
     }
     totalResults = json['total_results'];
@@ -31,13 +31,12 @@ class PeopleModel extends People {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['page'] = page;
-    if (results != null) {
-      map['results'] = results?.map((v) {
-        ResultsModel resultsModel = ResultsModel(
+    if (personsList != null) {
+      map['results'] = personsList?.map((v) {
+        PersonModel resultsModel = PersonModel(
           profilePath: v.profilePath,
           adult: v.adult,
           id: v.id,
-          knownFor: v.knownFor,
           name: v.name,
           popularity: v.popularity,
         );

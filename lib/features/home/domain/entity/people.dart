@@ -1,15 +1,15 @@
-import 'results.dart';
+import 'person.dart';
 
 class People {
   People({
     this.page,
-    this.results,
+    this.personsList,
     this.totalResults,
     this.totalPages,
   });
 
   int? page;
-  List<Results>? results;
+  List<Person>? personsList;
   int? totalResults;
   int? totalPages;
 }

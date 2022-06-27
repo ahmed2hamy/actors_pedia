@@ -1,5 +1,5 @@
 import 'package:actors_pedia/core/helpers/dialogs.dart';
-import 'package:actors_pedia/features/home/domain/entity/results.dart';
+import 'package:actors_pedia/features/home/domain/entity/person.dart';
 import 'package:actors_pedia/features/home/presentation/manger/home_cubit.dart';
 import 'package:actors_pedia/features/home/presentation/widgets/home_loaded_state_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeBodyWidget extends StatelessWidget {
   const HomeBodyWidget({
     Key? key,
-    required List<Results> results,
+    required List<Person> results,
     required ScrollController scrollController,
   })  : _results = results,
         _scrollController = scrollController,
         super(key: key);
 
-  final List<Results> _results;
+  final List<Person> _results;
   final ScrollController _scrollController;
 
   @override
@@ -31,7 +31,7 @@ class HomeBodyWidget extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (state is HomeLoadedState) {
-          _results.addAll(state.people.results ?? []);
+          _results.addAll(state.people.personsList ?? []);
 
           return HomeLoadedStateWidget(
             scrollController: _scrollController,
