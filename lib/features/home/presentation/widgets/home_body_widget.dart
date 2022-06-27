@@ -7,11 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBodyWidget extends StatelessWidget {
-  HomeBodyWidget({
+  const HomeBodyWidget({
     Key? key,
     required ScrollController scrollController,
+    required List<Person> persons,
   })  : _scrollController = scrollController,
-        _persons = [],
+        _persons = persons,
         super(key: key);
 
   final ScrollController _scrollController;

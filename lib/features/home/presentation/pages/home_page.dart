@@ -1,5 +1,6 @@
 import 'package:actors_pedia/constants/constants.dart';
 import 'package:actors_pedia/core/widgets/custom_app_bar.dart';
+import 'package:actors_pedia/features/home/domain/entity/person.dart';
 import 'package:actors_pedia/features/home/presentation/manger/home_cubit.dart';
 import 'package:actors_pedia/features/home/presentation/manger/home_scroll_to_top_provider.dart';
 import 'package:actors_pedia/features/home/presentation/widgets/home_body_widget.dart';
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
+  final List<Person> _persons = [];
   int _page = 1;
 
   @override
@@ -63,6 +65,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: HomeBodyWidget(
         scrollController: _scrollController,
+        persons: _persons,
       ),
       floatingActionButton: HomeFloatingActionButton(onPressed: _scrollToTop),
     );

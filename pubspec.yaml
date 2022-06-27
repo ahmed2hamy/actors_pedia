@@ -29,6 +29,7 @@ dependencies:
   #Services
   equatable: ^2.0.3
   dartz: ^0.10.1
+  image_downloader: ^0.31.0
 
   #Remote Data
   connectivity_plus: ^2.3.5

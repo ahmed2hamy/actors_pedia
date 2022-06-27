@@ -1,7 +1,9 @@
 import 'package:actors_pedia/constants/constants.dart';
+import 'package:actors_pedia/core/helpers/app_navigator.dart';
 import 'package:actors_pedia/core/helpers/dialogs.dart';
 import 'package:actors_pedia/core/widgets/adaptive_image.dart';
 import 'package:actors_pedia/core/widgets/app_loading_widget.dart';
+import 'package:actors_pedia/core/widgets/app_phot_view.dart';
 import 'package:actors_pedia/features/home/domain/entity/person.dart';
 import 'package:actors_pedia/features/person_details/domain/entities/person_details.dart';
 import 'package:actors_pedia/features/person_details/presentation/manager/person_details_cubit.dart';
@@ -167,10 +169,21 @@ class PersonImagesWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               String? path = state.personImages.profiles?[index].filePath;
               return path != null
-                  ? Card(
-                      margin: const EdgeInsets.all(8.0),
-                      child: AdaptiveImage(
-                        imageUrl: kImagesBaseUrl + path,
+                  ? InkWell(
+                      onTap: () {
+                        AppNavigator.pushTo(
+                          context,
+                          widget: AppPhotoView(
+                            url: kImagesBaseUrl + path,
+                            tag: path,
+                          ),
+                        );
+                      },
+                      child: Card(
+                        margin: const EdgeInsets.all(8.0),
+                        child: AdaptiveImage(
+                          imageUrl: kImagesBaseUrl + path,
+                        ),
                       ),
                     )
                   : const SizedBox();
