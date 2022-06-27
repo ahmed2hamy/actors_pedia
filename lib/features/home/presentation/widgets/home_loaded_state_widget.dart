@@ -1,6 +1,8 @@
 import 'package:actors_pedia/constants/constants.dart';
+import 'package:actors_pedia/core/helpers/app_navigator.dart';
 import 'package:actors_pedia/core/widgets/adaptive_image.dart';
 import 'package:actors_pedia/features/home/domain/entity/person.dart';
+import 'package:actors_pedia/features/person_details/presentation/pages/person_details_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeLoadedStateWidget extends StatelessWidget {
@@ -27,8 +29,9 @@ class HomeLoadedStateWidget extends StatelessWidget {
 
         String? name = _persons[index].name;
         String? imageUrl = _persons[index].profilePath;
+        int? personId = _persons[index].id;
 
-        if (name != null && imageUrl != null) {
+        if (name != null && imageUrl != null && personId != null) {
           return Card(
             child: Stack(
               alignment: AlignmentDirectional.bottomEnd,
@@ -54,7 +57,10 @@ class HomeLoadedStateWidget extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () => AppNavigator.pushTo(
+                        context,
+                        widget: PersonDetailsPage(personId: personId),
+                      ),
                     ),
                   ),
                 ),
