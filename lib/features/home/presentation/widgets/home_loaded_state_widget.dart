@@ -7,26 +7,26 @@ class HomeLoadedStateWidget extends StatelessWidget {
   const HomeLoadedStateWidget({
     Key? key,
     required ScrollController scrollController,
-    required List<Person> results,
+    required List<Person> persons,
   })  : _scrollController = scrollController,
-        _results = results,
+        _persons = persons,
         super(key: key);
 
   final ScrollController _scrollController;
-  final List<Person> _results;
+  final List<Person> _persons;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       controller: _scrollController,
-      itemCount: _results.length,
+      itemCount: _persons.length,
       itemBuilder: (context, index) {
-        if (index == _results.length - 1) {
+        if (index == _persons.length - 1) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        String? name = _results[index].name;
-        String? imageUrl = _results[index].profilePath;
+        String? name = _persons[index].name;
+        String? imageUrl = _persons[index].profilePath;
 
         if (name != null && imageUrl != null) {
           return Card(
